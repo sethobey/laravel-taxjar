@@ -21,9 +21,5 @@ class TaxJarServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/taxjar.php' => config_path('taxjar.php'),
         ], 'config');
-
-        $this->publishes([
-            __DIR__.'/../database/migrations/create_larajar_tables.php.stub' => $this->getMigrationFileName('create_larajar_tables.php'),
-        ], 'migrations');
     }
 }

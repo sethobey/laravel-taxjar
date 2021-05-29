@@ -73,12 +73,14 @@ class TaxJarApi
     {
         $response = $this->client->categories();
 
-        return Util::convertToLaraJarObject($response, 'Category');
+        return Util::convertToLaraJarObject($response, Category::OBJECT_NAME);
     }
 
     public function ratesForLocation(string $zip, array $additionalFields = []): object
     {
-        return $this->client->ratesForLocation($zip, $additionalFields);
+        $response = $this->client->ratesForLocation($zip, $additionalFields);
+
+        return Util::convertToLaraJarObject($response, Rate::OBJECT_NAME);
     }
 
     public function taxForCharge(
@@ -89,7 +91,7 @@ class TaxJarApi
         string $exemptionType = 'non_exempt'
     ): object {
 
-        return $this->client->taxForOrder([
+        $response = $this->client->taxForOrder([
             'from_country' => $fromAddress['country'],
             'from_zip' => $fromAddress['zip'],
             'from_state' => $fromAddress['state'],
@@ -104,6 +106,8 @@ class TaxJarApi
             'line_items' => $lineItems,
             'exemption_type' => $exemptionType,
         ]);
+
+        return Util::convertToLaraJarObject($response, Tax::OBJECT_NAME);
     }
 
     public function listOrders(array $params = []): object

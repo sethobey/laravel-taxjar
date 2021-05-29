@@ -10,12 +10,7 @@ namespace LaraJar;
  * @property string $product_tax_code
  * @property string $description
  */
-class Category
+class Category extends ApiObject
 {
-    public function __construct($attributes = [])
-    {
-        foreach ($attributes as $key => $value) {
-            $this->$key = $value;
-        }
-    }
+    public const OBJECT_NAME = 'Category';
 }
